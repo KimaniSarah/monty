@@ -49,4 +49,5 @@ int main();
 void _pall();
 void _pint();
 void free_stack(stack_t **stack);
+void _pop(stack_t **stack, unsigned int line_number);
 #endif
