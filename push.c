@@ -1,4 +1,9 @@
 #include "monty.h"
+/**
+ * _push - insert a value at the top of the stack
+ * @arg:argument
+ * @line_number:the literal line number
+ */
 void _push(char *arg, unsigned int line_number)
 {
 	int value;
@@ -20,7 +25,7 @@ void _push(char *arg, unsigned int line_number)
 		h++;
 	}
 	value = atoi(arg);
-	if (top >= SIZE-1)
+	if (top >= SIZE - 1)
 	{
 		printf("L%u: stack overflow\n", line_number);
 		exit(EXIT_FAILURE);
@@ -31,7 +36,10 @@ void _push(char *arg, unsigned int line_number)
 		stack[top] = value;
 	}
 }
-void pall()
+/**
+ * _pall -  print all the values on the stack
+ */
+void _pall(void)
 {
 	int h;
 

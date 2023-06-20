@@ -46,5 +46,7 @@ extern int top;
 
 void _push(char *arg, unsigned int line_number);
 int main();
-void pall();
+void _pall();
+void _pint();
+void free_stack(stack_t **stack);
 #endif
