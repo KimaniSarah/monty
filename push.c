@@ -4,47 +4,48 @@
  * @arg:argument
  * @line_number:the literal line number
  */
-void _push(char *arg, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
-	int value;
-	size_t h;
+	char *arg;
+	int n;
 
-	if (arg == NULL || strlen(arg) == 0)
+	arg = strtok(NULL, " \t\r\n");
+	if (arg == NULL || !check_for_digit(arg))
 	{
 		printf("L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	h = 0;
-	while (h < strlen(arg))
+	n = atoi(arg);
+	if (!new_node_create(stack, n))
 	{
-		if (!isdigit(arg[h]))
-		{
-			printf("L%u: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-		}
-		h++;
-	}
-	value = atoi(arg);
-	if (top >= SIZE - 1)
-	{
-		printf("L%u: stack overflow\n", line_number);
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		top++;
-		stack[top] = value;
-	}
+	variable.stack_length++;
 }
 /**
- * _pall -  print all the values on the stack
+ * check_for_digit - check if a string only contain digits
+ * @str:the string to check for digits
+ * Return: 0 if true else false
  */
-void _pall(void)
+int check_for_digit(char *str)
 {
-	int h;
-
-	for (h = top; h >= 0; h--)
+	size_t i;
+	
+	if (str == NULL || *str == '\0')
 	{
-		printf("%d\n", stack[h]);
+		return (0);
 	}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] == '-' && i == 0)
+		{
+			continue;
+		}
+		if (!isdigit(str[i]))
+		{
+			return (1);
+		}
+	}
+	return (0);
 }

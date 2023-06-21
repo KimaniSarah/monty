@@ -1,18 +1,19 @@
 #include "monty.h"
 /**
- * _pint - print value on top of `stack', or exit if stack is empty
+ * _pint - print value on top
  * @stack: double pointer to top of stack
  * @line_number: line number of current op
  */
 void _pint(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
+	stack_t *current;
+
+	current = *stack;
+
+	if (variable.stack_length == 0)
 	{
 		printf("L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		printf("%d\n", (*stack)->n);
-	}
+	printf("%d\n", current->n);
 }

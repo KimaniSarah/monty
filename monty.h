@@ -21,9 +21,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+		int n;
+		struct stack_s *prev;
+		struct stack_s *next;
 } stack_t;
 
 /**
@@ -36,18 +36,32 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+		char *opcode;
+		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 #define SIZE 100
+#define STACKS 0
+#define QUEUES 1
 int stack[SIZE];
 extern int top;
-
-void _push(char *arg, unsigned int line_number);
-int main();
-void _pall();
-void _pint();
+/**
+ * struct variable_s - struct to contain the main variables of the Monty interpreter
+ * @queues: flag to determine if in stack vs queue mode
+ * @stack_length: length of the stack
+ */
+typedef struct variable_s
+{
+	int queues;
+	size_t stack_length;
+} variable_t;
+extern variable_t variable;
+stack_t *new_node_create(stack_t **stack, const int n);
+int check_for_digit(char *str);
+void _push(stack_t **stack, unsigned int line_number);
+int main(int argc, char *argv[]);
+void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
-void _pop(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, __attribute__((unused))unsigned int line_number);
 #endif

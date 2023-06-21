@@ -1,0 +1,73 @@
+#include "monty.h"
+variable_t variable;
+int main(int argc, char *argv[])
+{
+	int file_index;
+	size_t len;
+	char *token;
+	unsigned int line_number;
+	char instruction[100];
+	FILE *file;
+	stack_t *stack = NULL;
+
+	if (argc < 2)
+	{
+		return (1);
+	}
+	for (file_index = 1; file_index < argc; file_index++)
+	{
+		line_number = 1;
+
+		file = fopen(argv[file_index], "r");
+		if (file == NULL)
+		{
+			printf("Unable to open the file: %s\n", argv[file_index]);
+			continue;
+		}
+
+		while (fgets(instruction, sizeof(instruction), file))
+		{
+			len = strlen(instruction);
+			if (len > 0 && instruction[len - 1] == '\n')
+			{
+				instruction[len - 1] = '\0';
+			}
+			token = strtok(instruction, " ");
+			if (token == NULL)
+			{
+				printf("L%u: Empty instruction\n", line_number);
+				continue;
+			}
+			if (strcmp(token, "push") == 0)
+			{
+				token = strtok(NULL, " ");
+				if (token == NULL)
+				{
+					printf("L%u: Missing argument for push\n", line_number);
+					continue;
+				}
+				_push(&stack, line_number);
+			}
+			else if (strcmp(token, "pall") == 0)
+			{
+				_pall(&stack, line_number);
+			}
+			else if (strcmp(token, "pint") == 0)
+			{
+				_pint(&stack, line_number);
+			}
+			else if (strcmp(token, "pop") == 0)
+			{
+				_pop(&stack, line_number);
+			}
+			else
+			{
+				printf("L%u: Unknown instruction: %s\n", line_number, token);
+			}
+			line_number++;
+		}
+		fclose(file);
+	}
+
+	return (0);
+}
