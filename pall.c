@@ -1,5 +1,4 @@
 #include "monty.h"
-int top = -1;
 /**
  * _pall -  print all the values on the stack
  *  @stack: double pointer to top of stack

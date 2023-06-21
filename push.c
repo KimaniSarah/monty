@@ -1,7 +1,7 @@
 #include "monty.h"
 /**
  * _push - insert a value at the top of the stack
- * @arg:argument
+ * @stack:pointer to top
  * @line_number:the literal line number
  */
 void _push(stack_t **stack, unsigned int line_number)
@@ -31,7 +31,7 @@ void _push(stack_t **stack, unsigned int line_number)
 int check_for_digit(char *str)
 {
 	size_t i;
-	
+
 	if (str == NULL || *str == '\0')
 	{
 		return (0);
