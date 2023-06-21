@@ -44,7 +44,6 @@ typedef struct instruction_s
 #define STACKS 0
 #define QUEUES 1
 int stack[SIZE];
-extern int top;
 /**
  * struct variable_s - struct to contain the main variables of the Monty interpreter
  * @queues: flag to determine if in stack vs queue mode
